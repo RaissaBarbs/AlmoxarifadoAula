@@ -1,0 +1,95 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+<h1>Categorias</h1>
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Descrição</th>
+        </tr>
+    </thead>
+    <tbody id="table">
+    </tbody>
+</table>
+<h1>Produtos</h1>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Descrição</th>
+            </tr>
+        </thead>
+        <tbody id="tableProdutos">
+        </tbody>
+</table>
+<h1>Motivos</h1>
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Descrição</th>
+            <th scope="col">Cat_Id</th>
+        </tr>
+    </thead>
+    <tbody id="tableMotivos">
+    </tbody>
+</table>
+<input class="form-control" id="MotDescricao" placeholder="Motivo Descrição"/>
+<input class="form-control mt-3" type="number" id="CatIdMotivo" placeholder="CategoriaId Descrição"/>
+<button type="button" class="btn btn-dark mt-3" onclick="teste2()">InserirProdutoFixo</button>
+
+<script>
+    function teste(){
+        var url = window.location.href + "categorias"
+
+        var Table = document.getElementById('table')
+        fetch(url).then(response => {
+            return response, json();
+        }).then(data => {
+            console.log(data)
+            data.forEach((element) => {
+                Table.innerHTML += `
+                           <tr>
+                             <th scope="row">${element.catId}<\th>
+                             <td>${element.catDescricao}</td>
+                             </tr>`
+            })
+        })
+    }
+
+    function teste3() {
+        var url = window.location.href + "Motivos"
+
+        var Table = document.getElementById('tableMotivos')
+        Table.innerHTML = ''
+        fetch(url).then(response => {
+            return response, json();
+        }).then(data => {
+            console.log(data)
+            data.forEach((element) => {
+                Table.innerHTML += `
+                               <tr>
+                                 <th scope="row">${element.catId}<\th>
+                                 <td>${element.catDescricao}</td>
+                                 </tr>`
+            })
+        })
+    }
+    teste()
+    teste3()
+    function teste2() {
+        var url = window.location.href + "Motivos"
+        var motivoDescricao = document.getElementById('MotDescricao').value
+        var CatIdMotivo = document.getElementById('CatIdMotivo').value
+
+        if (motivoDescricao =="" || CatIdMotivo =="" || parseInt(CatIdMotivo) == Number{
+            alert("Campos Vazios Verifique")
+            return
+        }
+        const data = {
+            motDescricao: motivoDescricao,
+            catId: CatIdMotivo,
+        };
+    }
+</script>
